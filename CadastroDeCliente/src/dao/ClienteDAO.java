@@ -1,6 +1,7 @@
-package Dao;
+package dao;
 
 import controller.*;
+import conexão.ConnectionFactory;
 import conexão.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,6 +1,6 @@
 package controller;
 
-import Dao.ClienteDAO;
+import dao.ClienteDAO;
 import conexão.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
