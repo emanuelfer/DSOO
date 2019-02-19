@@ -1,5 +1,6 @@
-package controller;
+package Dao;
 
+import controller.*;
 import conexão.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,8 +15,9 @@ public class ClienteDAO {
         
     }
     
-    public void insere(ClienteBEAN cliente) throws SQLException{
-        String sql = "insert into cliente (nome, nascimento, nomeMae, cpf)" + "values(?, ?, ?, ?)";
+    public boolean insere(ClienteBEAN cliente){
+        String sql = "insert into cliente (nome, nascimento, nomeMae, cpf) values(?, ?, ?, ?)";          
+        try{
             ConnectionFactory fabrica = new ConnectionFactory();
             this.conexao = fabrica.getConexao();
             PreparedStatement stmt = this.conexao.prepareStatement(sql);
@@ -26,6 +28,11 @@ public class ClienteDAO {
             stmt.execute();
             this.conexao.close();
             stmt.close(); 
+            
+        }catch(SQLException e){
+            return false;
+        }
+        return true;
     }
     
     

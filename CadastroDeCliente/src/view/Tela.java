@@ -1,6 +1,6 @@
 package view;
 
-import controller.ClienteDAO;
+import controller.ControllerCliente;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
@@ -139,19 +139,14 @@ public class Tela extends javax.swing.JFrame {
         nomeMae = txtNomeMae.getText();
         CPF = txtCPF.getText();
         ClienteBEAN cliente = new ClienteBEAN();
-        if(ClienteDAO.verificaNascimento(nascimento)){
-            try{
-                ClienteDAO clienteBD = new ClienteDAO(); 
-                cliente.setNome(nome);
-                cliente.setNascimento(nascimento);
-                cliente.setNomeMae(nomeMae);
-                cliente.setCpf(CPF);
-                clienteBD.insere(cliente);
-                JOptionPane.showMessageDialog(null, "Salvo com sucesso!");  
-            }catch(SQLException e){
-                JOptionPane.showMessageDialog(null, "ERRO AO CONECTAR AO BANCO DE DADOS");
-                System.exit(0);
-            }        
+        if(ControllerCliente.verificaNascimento(nascimento)){
+            ControllerCliente cc = new ControllerCliente(); 
+            cliente.setNome(nome);
+            cliente.setNascimento(nascimento);
+            cliente.setNomeMae(nomeMae);
+            cliente.setCpf(CPF);
+            String mensagem = cc.insere(cliente);
+            JOptionPane.showMessageDialog(null, mensagem);     
         }else{
             JOptionPane.showMessageDialog(null, "DATA DE NASCIMENTO INCORRETA!");
         }
